@@ -1,7 +1,21 @@
 var system = require('system');
 var url = system.args[ 1 ];
 var page = require( 'webpage' ).create();
-var headings = require('./headings');
+
+/**
+ * Proper error handling
+ */
+phantom.onError = function( msg, trace ) {
+  var msgStack = [ 'PHANTOM ERROR: ' + msg ];
+  if ( trace && trace.length ) {
+    msgStack.push( 'TRACE:' );
+    trace.forEach( function( t ) {
+      msgStack.push( ' -> ' + ( t.file || t.sourceURL ) + ': ' + t.line + ( t.function ? ' (in function ' + t.function + ')' : '' ) );
+    } );
+  }
+  console.error( msgStack.join('\n') );
+  phantom.exit( 1 );
+};
 
 page.open( url, function( status ) {
 
@@ -36,6 +50,8 @@ page.open( url, function( status ) {
 			return shortBold;
 
 		});
+		
+
 
 	}	
 
@@ -50,7 +66,7 @@ page.open( url, function( status ) {
 		console.log('WCAG2 Level A, 1.3.1 - page contains no short, bold paragraphs which might be acting as headings');
 	}
 
-	
+
 	phantom.exit();
 	
 });
