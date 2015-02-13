@@ -25,14 +25,9 @@ page.open( url, function( status ) {
 		console.log( 'URL opened ' + url );
 
 		/*
-		* test paragraphs which might be acting as headings
+		* test for headings
 		*/
 		var listHeadings = page.evaluate( function() {
-
-			function getStyle( element, cssProperty ) {
-
-				return window.getComputedStyle( element, null ).getPropertyCSSValue( cssProperty ).cssText;
-			}
 
 			var headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
 
@@ -44,12 +39,9 @@ page.open( url, function( status ) {
 				
 			}
 
-			// console.log( headingList );
 			return headingList;
 
 		});
-		
-
 
 	}	
 
@@ -57,7 +49,7 @@ page.open( url, function( status ) {
 	* log results
 	*/
 
-	// first suspect headings
+	// output haedings
 	if ( listHeadings.length > 0 ) {
 		console.log( 'This page has the following headings:' );
 		for( var j = 0; j < listHeadings.length; j++ ) {
