@@ -10,7 +10,7 @@ page.open( url, function( status ) {
 		console.log( 'URL opened ' + url );
 
 		/*
-		* test paragraphs which might be acting as headings
+		* test for linked images
 		*/
 		var linkedImages = page.evaluate( function() {
 
@@ -32,8 +32,9 @@ page.open( url, function( status ) {
 	* log results
 	*/
 
-	// first suspect headings
+	// output list of linked images
 	if ( linkedImages.length > 0 ) {
+
 		console.log( 'There are linked images with alt attributes' );
 		for( var j = 0; j < linkedImages.length; j++ ) {
 		    console.log( ( j + 1 ) + ' | ' + linkedImages[ j ] );
