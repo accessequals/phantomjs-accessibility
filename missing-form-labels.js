@@ -2,6 +2,21 @@ var system = require('system');
 var url = system.args[ 1 ];
 var page = require( 'webpage' ).create();
 
+/**
+ * Proper error handling
+ */
+phantom.onError = function( msg, trace ) {
+  var msgStack = [ 'PHANTOM ERROR: ' + msg ];
+  if ( trace && trace.length ) {
+    msgStack.push( 'TRACE:' );
+    trace.forEach( function( t ) {
+      msgStack.push( ' -> ' + ( t.file || t.sourceURL ) + ': ' + t.line + ( t.function ? ' (in function ' + t.function + ')' : '' ) );
+    } );
+  }
+  console.error( msgStack.join('\n') );
+  phantom.exit( 1 );
+};
+
 page.open( url, function( status ) {
 
 	if ( status === "success" ) {
@@ -14,7 +29,7 @@ page.open( url, function( status ) {
 		*/
 		var missingIds = page.evaluate( function() {
 
-			// we don't want submits
+			// we don't want submit, image, hidden etc
 			var inputs = document.querySelectorAll( 'select, textarea, input[type="text"], input[type="email"], input[type="number"], input[type="date"], input[type="tel"]' ),
 				missingIds = 0,
 				label,
@@ -65,7 +80,7 @@ page.open( url, function( status ) {
 			
 	} else {
 
-		console.log( 'No issues with form input labelling' );
+		console.log( 'No issues with form input labelling on this page' );
 	}
 
 
