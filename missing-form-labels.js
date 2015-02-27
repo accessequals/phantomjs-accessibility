@@ -40,7 +40,7 @@ page.open( url, function( status ) {
 
 				for ( var i = 0; i < inputs.length; i++ ) {
 
-					if ( inputs[ i ].getAttribute( 'id' ) === null ) { // no id - therefore even if labelled, no programmatic link
+					if ( inputs[ i ].getAttribute( 'id' ) === null && inputs[ i ].getAttribute( 'aria-labelledby' ) === null ) { // no id or aria-labelledby - therefore even if labelled, no programmatic link
 		
 						errMessages.push( inputs[ i ].getAttribute( 'name' ) );
 
