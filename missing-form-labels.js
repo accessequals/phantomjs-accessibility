@@ -71,7 +71,7 @@ page.open( url, function( status ) {
 	// output list of linked images
 	if ( missingIds.length > 0) {
 
-		console.log( '\nInputs with the following ids/names do not have labels associated with them:\n');
+		console.log( '\nInputs with the following ids/names do not have labels associated with them or aria-labelledby attributes:\n');
 
 		for( var j = 0; j < missingIds.length; j++ ) {
 
