@@ -3,7 +3,7 @@
 ## Running the tests
 1. Install PhantomJS.
 2. Clone these tests: git clone https://github.com/accessequals/phantomjs-accessibility.git
-3. Run them with a command in this format: phantomjs [test script] [site]
+3. Run them with a command in this format: phantomjs [test script] [target url]
 
 ##Notes:
 * multi-test.js combines two tests and outputs the results to the console and 

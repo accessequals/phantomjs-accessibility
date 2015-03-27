@@ -1,0 +1,137 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Phantom Test File</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="libs/underscore.js"></script>
+		<style>
+			body {
+				font: 100%/1.5 sans-serif;
+			}
+			h1, h2, h3 {
+				line-height: 1.3;
+			}
+			h2 {
+				border-bottom: 3px solid #eee;
+			}
+			[role="main"] {
+				max-width: 40em;
+			}
+		</style>
+        
+    </head>
+    <body>
+    	<main role="main">
+	        <h1>Phantom Test File</h1>
+			<h2>Pseudo lists</h2>
+	        <h3>Separate paragraphs used to create list items which start with a bullet</h3>
+	        <p>Testing will check for consecutive paragraphs which start with a bullet character. </p>
+	        <p>&#8226; Bullet created with entity, &amp#8226; </p>
+	        <p>&#x02022; Bullet created with entity, &amp#x02022;</p>
+	        <p>&bull; Bullet created with entity, &ampbull;</p>
+	        <p>&bullet; Bullet created with entity, &ampbullet;</p>
+
+	        <h3>List items created by use of break tags within a single paragraph</h3>
+	        <p>Bacon<br>Beans<br>Sausages<br>Eggs</p>
+
+	        <h3>List items created by separate spans</h3>
+
+	        <h2>Link Purpose: checkpoint: 2.4.4</h2>
+	        <h3>Passes</h3>
+	        <h4>Link in same paragph of related text</h4>
+	        <p>Bangor is a town in Northern Ireland. <a href="#">More Info</a></p>
+
+	        <h4>Link in context of a sentence</h4>
+	        <p><a href="#">Read more</a> about Bangor</p>
+
+	        <h4>Link in a separate paragraph, but with a title attribute </h4>
+	        <p>Bangor is a town in Northern Ireland</p>
+	        <p><a href="#" title="about Bangor">Read more</a></p>
+
+	        <h4>Link in a separate paragraph, but with an aria-describedby attribute</h4>
+			<p id="bangor">Bangor is a town in Northern Ireland</p>
+			<p><a href="#" aria-describedby="bangor">Read more</a></p>
+
+			<p>N.B. In VoiceOver on Mac OSX 10.10.2 and on the iPad iOS8, there is a significant delay before the title attribute and the aria-decribedby value gets announced.</p>
+        </main>
+
+        <script>
+        (function() {
+
+        	var paras = document.querySelectorAll('p'),
+        		i,
+        		bullets = 0,
+        		txt;
+
+        	/*
+        	* helper to check whether an element starts with a bullet
+        	*/
+
+        	function isBulletStart( el ) {
+
+        		// get text of element
+        		var txt = el.textContent;
+
+        		// check if text starts with bullet
+        		if ( txt.charCodeAt( 0 )  === 8226) {
+        			
+        			return true;
+
+        		}
+
+        	}
+
+        	/*
+        	* helper to get the next sibling of an element
+        	*/
+
+        	function getSibling( el ) {
+
+        		return el.nextElementSibling;
+        	}
+
+        	// loop through paragraphs
+        	for ( var i = 0; i < paras.length; i++ ) {
+        			
+        		// check to see if paragraphs start with a bullet
+        		if ( isBulletStart( paras[ i ] ) ) {
+        			
+        			// check to see if their siblings start with bullets
+        			if ( isBulletStart(getSibling(paras[ i ]))) {
+
+        				bullets++;
+        			}
+
+        		} 	
+
+        		// check to see if paragraphs contain multiple break tags
+        		if ( paras[ i ].children.length ) {
+
+        			var children = paras[i].children,
+        				breakTags = 0;
+        			
+
+        			for ( j = 0; j < children.length; j++ ) {
+
+        				if ( children[ j ].nodeName === 'BR') {
+
+        					breakTags++;
+        				}
+        			}
+
+        			
+        		}
+
+        	}
+
+        	console.log(bullets + ' paragraphs start with a bullet');
+        	console.log('There are ' + breakTags + ' break tags');
+        	
+        	
+        })();
+        </script>
+    </body>
+</html>

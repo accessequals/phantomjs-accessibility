@@ -1,0 +1,25 @@
+{
+  "name": "phantomjs-accessibility",
+  "version": "1.0.0",
+  "description": "Accessibility tests with Phantomjs",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/accessequals/phantomjs-accessibility.git"
+  },
+  "author": "William Gates",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/accessequals/phantomjs-accessibility/issues"
+  },
+  "homepage": "https://github.com/accessequals/phantomjs-accessibility",
+  "devDependencies": {
+    "browser-sync": "^2.2.1",
+    "gulp": "^3.8.11",
+    "gulp-compass": "^2.0.3",
+    "gulp-minify-css": "^0.5.1"
+  }
+}
